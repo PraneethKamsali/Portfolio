@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maggie's Centre Portfolio - Praneeth Kamsali</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .content-panel {
+            display: none;
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #667eea;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        .highlight {
+            background: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 1.5rem 0;
+        }
+
+        .success-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .info-card strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 0.3rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f3f4f6;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .download-btn {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                gap: 0.5rem;
+            }
+
+            .tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Maggie's Centre Extension</h1>
+            <p>Project Execution Strategy Portfolio</p>
+            <div class="badge">🏆 Certificate of Recognition for Outstanding Performance</div>
+            <div class="badge">MSc Construction Project Management with BIM</div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab active" onclick="showTab('overview')">Overview</button>
+            <button class="tab" onclick="showTab('schedule')">Schedule</button>
+            <button class="tab" onclick="showTab('iso')">ISO 19650</button>
+            <button class="tab" onclick="showTab('evm')">EVM</button>
+            <button class="tab" onclick="showTab('risk')">Risk</button>
+            <button class="tab" onclick="showTab('skills')">Skills</button>
+        </div>
+
+        <!-- Overview Panel -->
+        <div id="overview" class="content-panel active">
+            <h2>Project Overview</h2>
+            
+            <div class="highlight">
+                <p style="font-size: 1.1rem; line-height: 1.6;">
+                    £150,000 Maggie's Centre healthcare facility extension delivered within 20-week programme. 
+                    Complex multi-phase project involving piling foundations, modular manufacturing, steel installation, 
+                    and sensitive healthcare fit-out works.
+                </p>
+            </div>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">£150k</div>
+                    <div class="metric-label">Project Value</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">20</div>
+                    <div class="metric-label">Weeks Duration</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">47</div>
+                    <div class="metric-label">Clashes Resolved</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">100%</div>
+                    <div class="metric-label">ISO 19650 Compliance</div>
+                </div>
+            </div>
+
+            <h3>My Role: Design & BIM Coordination Lead</h3>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <strong>BIM Coordination</strong>
+                    Led multidisciplinary coordination across architectural, structural, and MEP disciplines using Revit and Navisworks. Identified and resolved 47 coordination issues through clash detection.
+                </div>
+                <div class="info-card">
+                    <strong>Planning & Scheduling</strong>
+                    Developed master construction schedule identifying manufacturing and steel installation as critical path drivers. Created logic-linked dependencies optimizing 20-week delivery.
+                </div>
+                <div class="info-card">
+                    <strong>Information Management</strong>
+                    Established ISO 19650-compliant Common Data Environment with structured gate governance and standardized naming conventions.
+                </div>
+                <div class="info-card">
+                    <strong>Project Controls</strong>
+                    Implemented Earned Value Management tracking and maintained NEC4-compliant commercial risk register with quantified cost impacts.
+                </div>
+            </div>
+
+            <h3>Project Outcomes Achieved</h3>
+            <ul>
+                <li><span class="success-badge">✓</span> 20-week programme delivered through critical path optimization</li>
+                <li><span class="success-badge">✓</span> Under budget (CV +£500) through 5D BIM cost integration</li>
+                <li><span class="success-badge">✓</span> ISO 19650 full compliance with zero non-conformance issues</li>
+                <li><span class="success-badge">✓</span> Risk-mitigated delivery with £25k exposure identified and controlled</li>
+                <li><span class="success-badge">✓</span> 47 design clashes resolved before construction phase</li>
+            </ul>
+        </div>
+
+        <!-- Schedule Panel -->
+        <div id="schedule" class="content-panel">
+            <h2>Master Construction Schedule & Critical Path</h2>
+
+            <h3>Critical Path Analysis</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Manufacturing (Weeks 3-17) - CRITICAL</h4>
+                    <p>35-day off-site modular production identified as primary programme driver. Zero float on critical path requiring strict monitoring.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Steel Installation (Weeks 8-12) - CRITICAL</h4>
+                    <p>25-day erection sequence driving completion date. Parallel execution with module manufacturing.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fit-out Phase (Weeks 13-18)</h4>
+                    <p>Resource-loaded preventing trade stacking. Peak labor: 12 workers in confined 150m² area.</p>
+                </div>
+            </div>
+
+            <h3>Key Schedule Metrics</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Total Duration</td>
+                    <td>20 weeks (140 days)</td>
+                </tr>
+                <tr>
+                    <td>Critical Path Length</td>
+                    <td>140 days (zero float)</td>
+                </tr>
+                <tr>
+                    <td>Peak Resources</td>
+                    <td>Week 14 (12 workers)</td>
+                </tr>
+                <tr>
+                    <td>Production Rate - Piling</td>
+                    <td>2 piles/day</td>
+                </tr>
+                <tr>
+                    <td>Production Rate - Modules</td>
+                    <td>1 module/5 days</td>
+                </tr>
+            </table>
+
+            <div class="highlight">
+                <strong>Resource Strategy Achievement:</strong>
+                <p style="margin-top: 0.5rem;">Zero trade conflicts through sequenced deployment. Confined space protocols maintained throughout. Labor efficiency: 0.75 hours per £1 value.</p>
+            </div>
+        </div>
+
+        <!-- ISO 19650 Panel -->
+        <div id="iso" class="content-panel">
+            <h2>ISO 19650 Common Data Environment</h2>
+
+            <h3>CDE Structure Implemented</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <strong>Work in Progress (WIP)</strong>
+                    Task team development and internal checking. Unverified information for team use only.
+                </div>
+                <div class="info-card">
+                    <strong>Shared</strong>
+                    Coordinated information for design team review. Status S1-S4 indicating review stages.
+                </div>
+                <div class="info-card">
+                    <strong>Published</strong>
+                    Client-authorized information for construction use. Status A1-A7 for approved documents.
+                </div>
+                <div class="info-card">
+                    <strong>Archive</strong>
+                    Legal record of project history. Full audit trail maintained.
+                </div>
+            </div>
+
+            <h3>Naming Convention Example</h3>
+            <div class="highlight">
+                <p style="font-family: monospace; font-size: 1.1rem; margin-bottom: 1rem;">
+                    MC-UNE-XX-00-DR-A-0001
+                </p>
+                <ul style="list-style: none; margin-left: 0;">
+                    <li><strong>MC-UNE:</strong> Maggie's Centre - University of Northumbria Extension</li>
+                    <li><strong>XX:</strong> Task team identifier</li>
+                    <li><strong>00:</strong> Building volume</li>
+                    <li><strong>DR:</strong> Type (Drawing)</li>
+                    <li><strong>A:</strong> Discipline (Architectural)</li>
+                    <li><strong>0001:</strong> Sequential number</li>
+                </ul>
+            </div>
+
+            <h3>Outcomes Achieved</h3>
+            <ul>
+                <li>100% compliance with ISO 19650-2 naming standards</li>
+                <li>Zero misfiled information containers across project lifecycle</li>
+                <li>Full audit trail maintained for regulatory compliance</li>
+                <li>Seamless information handover from design to construction</li>
+                <li>Data retrievable for future facility management</li>
+            </ul>
+        </div>
+
+        <!-- EVM Panel -->
+        <div id="evm" class="content-panel">
+            <h2>Earned Value Management Dashboard</h2>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">1.01</div>
+                    <div class="metric-label">CPI (Cost Performance)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">0.55</div>
+                    <div class="metric-label">SPI (Schedule Performance)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">+£500</div>
+                    <div class="metric-label">Cost Variance (Under Budget)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">-£82k</div>
+                    <div class="metric-label">Schedule Variance</div>
+                </div>
+            </div>
+
+            <h3>Performance Analysis (Week 11)</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>Planned Value (PV)</td>
+                    <td>£150,000</td>
+                    <td>Total Budget</td>
+                </tr>
+                <tr>
+                    <td>Actual Cost (AC)</td>
+                    <td>£67,500</td>
+                    <td>Spent to Date</td>
+                </tr>
+                <tr>
+                    <td>Earned Value (EV)</td>
+                    <td>£68,000</td>
+                    <td>Value Completed</td>
+                </tr>
+                <tr>
+                    <td>Cost Variance (CV)</td>
+                    <td>+£500</td>
+                    <td style="color: #10b981; font-weight: 600;">Under Budget ✓</td>
+                </tr>
+                <tr>
+                    <td>Schedule Variance (SV)</td>
+                    <td>-£82,000</td>
+                    <td style="color: #ef4444; font-weight: 600;">Behind Schedule</td>
+                </tr>
+            </table>
+
+            <h3>Root Cause & Recovery Strategy</h3>
+            <div class="highlight">
+                <p><strong>Root Cause:</strong> Manufacturing delayed start (Week 5 vs Week 3) created 14-day critical path slippage</p>
+                <p style="margin-top: 1rem;"><strong>Recovery Plan:</strong> Double-shift manufacturing operations (Week 12) to recover £82k value gap</p>
+                <p style="margin-top: 1rem;"><strong>Cost Impact:</strong> £8k acceleration premium justified by preventing £25k+ delay damages</p>
+            </div>
+
+            <h3>Forecast at Completion</h3>
+            <ul>
+                <li><strong>EAC:</strong> £158,000 (5.3% over original budget)</li>
+                <li><strong>Acceleration Cost:</strong> +£8,000</li>
+                <li><strong>Efficiency Savings:</strong> -£500 (from CPI 1.01)</li>
+                <li><strong>Commercial Rationale:</strong> £8k investment prevents potential £25k+ delay impact</li>
+            </ul>
+        </div>
+
+        <!-- Risk Panel -->
+        <div id="risk" class="content-panel">
+            <h2>Commercial Risk Register (NEC4 Compliant)</h2>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">15</div>
+                    <div class="metric-label">Total Risks Identified</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">£58.5k</div>
+                    <div class="metric-label">Pre-Mitigation Exposure</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">£9.5k</div>
+                    <div class="metric-label">Mitigation Investment</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">5:1</div>
+                    <div class="metric-label">Mitigation ROI</div>
+                </div>
+            </div>
+
+            <h3>Top Risks & Mitigation</h3>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>R01: Uncharted Utilities (Pre: 15 → Post: 5)</h4>
+                    <p><strong>Mitigation:</strong> Ground Penetrating Radar survey (£2.5k investment)</p>
+                    <p><strong>Value Protected:</strong> £10k (£12.5k exposure reduced to £2.5k)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>R02: Modular Delivery Delays (Pre: 20 → Post: 8)</h4>
+                    <p><strong>Mitigation:</strong> Just-in-Time delivery + off-site holding hub</p>
+                    <p><strong>Value Protected:</strong> £3.5k (£5k reduced to £1.5k)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>R03: Steel/Concrete Interface Clash (Pre: 12 → Post: 6)</h4>
+                    <p><strong>Mitigation:</strong> Digital scanning + Navisworks trial assembly (£3.5k)</p>
+                    <p><strong>Value Protected:</strong> £20k (£25k reduced to £5k)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>R05: Steel Price Inflation (Pre: 15 → Post: 3)</h4>
+                    <p><strong>Mitigation:</strong> Pre-order with fixed price contract clause</p>
+                    <p><strong>Value Protected:</strong> £8k (£8k exposure eliminated)</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h4 style="margin-bottom: 1rem;">Commercial Insight</h4>
+                <p>£9.5k mitigation investment protects £47k value (81% exposure reduction). Better commercial strategy than holding £58.5k contingency hoping risks don't materialize.</p>
+            </div>
+        </div>
+
+        <!-- Skills Panel -->
+        <div id="skills" class="content-panel">
+            <h2>Technical Competencies Demonstrated</h2>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <strong>BIM & Digital Design</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Autodesk Revit (Advanced)</li>
+                        <li>Navisworks Clash Detection</li>
+                        <li>AutoCAD Technical Drawings</li>
+                        <li>5D BIM Cost Integration</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <strong>Project Planning</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>MS Project Scheduling</li>
+                        <li>Primavera P6 (Self-taught)</li>
+                        <li>Critical Path Analysis</li>
+                        <li>Resource Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <strong>Project Controls</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Earned Value Management</li>
+                        <li>Variance Analysis</li>
+                        <li>Performance Tracking</li>
+                        <li>Cost-Schedule Integration</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <strong>Information Management</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>ISO 19650 Workflows</li>
+                        <li>CDE Protocols</li>
+                        <li>Document Control</li>
+                        <li>Data Governance</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <strong>Commercial Management</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>NEC4 Risk Register</li>
+                        <li>Cost Quantification</li>
+                        <li>Mitigation Strategies</li>
+                        <li>ROI Analysis</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <strong>Professional Development</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Self-Directed Learning</li>
+                        <li>Technical Initiative</li>
+                        <li>Industry Alignment</li>
+                        <li>Continuous Improvement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Primavera P6 - Self-Directed Learning</h3>
+            <div class="highlight">
+                <p><strong>Initiative:</strong> 40+ hours self-study over 6 weeks</p>
+                <p style="margin-top: 0.5rem;"><strong>Project:</strong> 12-story commercial building (£14.5m, 45 weeks)</p>
+                <p style="margin-top: 0.5rem;"><strong>Deliverables:</strong> 156 activities, resource optimization, EVM configuration, variance reports</p>
+                <p style="margin-top: 0.5rem;"><strong>Outcome:</strong> Industry-standard software competency beyond academic curriculum</p>
+            </div>
+
+            <h3>Key Achievements</h3>
+            <ul>
+                <li>🏆 Certificate of Recognition for Outstanding Performance</li>
+                <li>✓ 47 design clashes identified and resolved</li>
+                <li>✓ 100% ISO 19650 compliance (zero non-conformance)</li>
+                <li>✓ £47k risk value protected through mitigation</li>
+                <li>✓ Under budget delivery (CV +£500)</li>
+                <li>✓ Self-taught Primavera P6 Professional</li>
+            </ul>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h2 style="color: white; border: none; margin-bottom: 1rem;">Complete Project Documentation</h2>
+            <p style="font-size: 1.1rem; opacity: 0.9;">
+                Download the full technical portfolio with detailed schedules, analysis, and methodologies
+            </p>
+            <a href="Maggie_Centre_Portfolio.pdf" class="download-btn" download="Praneeth_Kamsali_Maggies_Centre_Portfolio.pdf">
+                📥 Download Full Portfolio (PDF)
+            </a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Note: Place "Maggie_Centre_Portfolio.pdf" in the same folder as this HTML file
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 3rem; color: white; opacity: 0.9;">
+            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Praneeth Kamsali</p>
+            <p>MSc Construction Project Management with BIM | Northumbria University</p>
+            <p style="margin-top: 0.5rem;">📧 praneethkamsali@gmail.com | 📱 +44 7721 965355 | 💼 linkedin.com/in/praneethkamsali</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Available for September 2026 Graduate Intake</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all panels
+            const panels = document.querySelectorAll('.content-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // Deactivate all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected panel
+            document.getElementById(tabName).classList.add('active');
+
+            // Activate clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
